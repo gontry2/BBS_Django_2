@@ -4,7 +4,7 @@ import datetime
 # Create your models here.
 class Article(models.Model):
     title = models.CharField('제목',max_length=200)
-    content = models.CharField('내용',max_length=1000)
+    content = models.TextField('내용',max_length=1000)
     writer = models.CharField('작성자', max_length=30)
     write_date = models.DateTimeField('작성일자', default=datetime.datetime.now())
     click_num = models.IntegerField('조회수', default=0)
@@ -20,4 +20,16 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
+class Comment(models.Model):
+    article_id = models.ForeignKey(Article, on_delete=models.CASCADE)
+    comment = models.CharField('댓글', max_length=200)
+    writer = models.CharField('작성자', max_length=30)
+    write_date = models.DateTimeField('작성일자', default=datetime.datetime.now())
+    like_num = models.IntegerField('좋아요', default=0)
+    unlike_num = models.IntegerField('싫어요', default=0)
+
+    def __str__(self):
+        return self.comment
+
 

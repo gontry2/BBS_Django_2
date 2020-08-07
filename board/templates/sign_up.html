@@ -32,18 +32,12 @@
     </div>
     <!-- END Header -->
 
-
-
-
-
-
-
     <!-- Content -->
     <div id="content" class="colM">
 
 
         <div id="content-main">
-            {% if error_message %} <span><strong>{{error_message}}</strong></span> {% endif %}
+            {% if message %} <span><strong>{{error_message}}</strong></span> {% endif %}
 
             <form action="{% url 'board:signUp' %}" method="post" id="login-form">
                 {% csrf_token %}
