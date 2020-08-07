@@ -1,0 +1,183 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <form action="{% url 'board:detail' 1%}" method="post">-->
+<!--        <p>제목: <input type="text"></p>-->
+<!--        <p>내용: <input type="text" style="width: 400px"></p>-->
+<!--        <input type="submit" value="저장">-->
+<!--        <input type="button" value="목록" onclick="location.href='{% url 'board:list' %}'">-->
+<!--    </form>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+    <title>Change article | Django site admin</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+
+
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+    <script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+    <script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+
+
+    <meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" app-board model-article change-form"
+      data-admin-utc-offset="32400">
+
+<!-- Container -->
+<div id="container">
+
+
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+
+            <h1 id="site-name"><a href="/board/">게시판</a></h1>
+
+        </div>
+
+
+        <div id="user-tools">
+            Welcome,
+            <strong>{{user.username}}</strong>.
+
+            <!--            <a href="/">View site</a> /-->
+            <!--            <a href="/admin/password_change/">Change password</a> /-->
+
+            <a href="{% url 'board:logOut' %}">Log out</a>
+
+        </div>
+
+
+
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrumbs">
+        <a href="{% url 'board:list' %}">Home</a>
+        &rsaquo; <a href="{% url 'board:list' %}">Articles</a>
+        &rsaquo; Write
+    </div>
+
+    <!-- Content -->
+    <div id="content" class="colM">
+
+        <h1>글 작성하기</h1>
+        <div id="content-main">
+
+
+<!--            <ul class="object-tools">-->
+
+
+
+<!--                <li>-->
+
+<!--                    <a href="/admin/board/article/1/history/" class="historylink">History</a>-->
+<!--                </li>-->
+
+
+
+
+<!--            </ul>-->
+
+
+            <form action="{% url 'board:save' %}" method="post" id="article_form" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="article" value="{{article.id}}">
+<!--                <input type="hidden" name="csrfmiddlewaretoken" value="YtfVqLkfxxfW8V8DpFtKRa0eco07ZLOm8ERL4iUBrIoMYCYWO3oB6YKz2dVuH5yL">-->
+                <div>
+                    <fieldset class="module aligned ">
+                        <div class="form-row field-title">
+                            <div>
+                                <label class="required" for="id_title">제목:</label>
+                                <input type="text" name="title" value="{{article.title}}" class="vTextField" maxlength="200" required id="id_title">
+                            </div>
+                        </div>
+                        <div class="form-row field-content">
+
+                            <div>
+                                <label class="required" for="id_content">내용:</label>
+                                <input type="text" name="content" value="{{article.content}}" class="vTextField" maxlength="1000" required id="id_content">
+                            </div>
+                        </div>
+
+<!--                        <div class="form-row field-writer">-->
+
+
+<!--                            <div>-->
+<!--                                <label class="required" for="id_writer">작성자:</label>-->
+<!--                                <input type="text" name="writer" value="" class="vTextField" maxlength="30" required id="id_writer">-->
+
+<!--                            </div>-->
+
+<!--                        </div>-->
+
+                    </fieldset>
+
+                    <div class="submit-row">
+
+                        <input type="submit" value="Save" class="default" name="_save">
+                        <input type="button" value="List" class="default" name="_list" onclick="location.href='{% url 'board:list' %}'">
+
+<!--                        <p class="deletelink-box"><a href="/admin/board/article/1/delete/" class="deletelink">Delete</a></p>-->
+
+                    </div>
+
+
+
+                    <script type="text/javascript"
+                            id="django-admin-form-add-constants"
+                            src="/static/admin/js/change_form.js"
+                    >
+                    </script>
+
+
+
+
+                    <script type="text/javascript"
+                            id="django-admin-prepopulated-fields-constants"
+                            src="/static/admin/js/prepopulate_init.js"
+                            data-prepopulated-fields="[]">
+                    </script>
+
+
+                </div>
+            </form></div>
+
+
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+    <title>Change article | Django site admin</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+
+
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+    <script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+    <script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+
+
+    <meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" app-board model-article change-form"
+      data-admin-utc-offset="32400">
+
+<!-- Container -->
+<div id="container">
+
+
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+
+            <h1 id="site-name"><a href="{% url 'board:list' %}">게시판</a></h1>
+
+        </div>
+
+
+        <div id="user-tools">
+
+            Welcome,
+            <strong>{{user.username}}</strong>.
+
+<!--            <a href="/">View site</a> /-->
+<!--            <a href="/admin/password_change/">Change password</a> /-->
+
+            <a href="{% url 'board:logOut' %}">Log out</a>
+
+        </div>
+
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrumbs">
+        <a href="{% url 'board:list' %}">Home</a>
+        &rsaquo; <a href="{% url 'board:list' %}">Articles</a>
+        &rsaquo; Detail
+    </div>
+
+    <!-- Content -->
+    <div id="content" class="colM">
+
+        <h1>글 상세내용</h1>
+        <div id="content-main">
+
+
+<!--            <ul class="object-tools">-->
+
+
+
+<!--                <li>-->
+
+<!--                    <a href="/admin/board/article/1/history/" class="historylink">History</a>-->
+<!--                </li>-->
+
+
+
+
+<!--            </ul>-->
+
+
+            <form action="" method="post" id="article_form" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="YtfVqLkfxxfW8V8DpFtKRa0eco07ZLOm8ERL4iUBrIoMYCYWO3oB6YKz2dVuH5yL">
+                <div>
+                    <fieldset class="module aligned ">
+                        <div class="form-row field-title">
+                            <div>
+                                <label class="required" for="id_title">제목:</label>
+                                <label type="text" name="title"  maxlength="200" required id="id_title">{{article.title}}</label>
+                            </div>
+                        </div>
+                        <div class="form-row field-content">
+                            <div>
+                                <label class="required" for="id_content">내용:</label>
+                                <label type="text" name="content"  maxlength="1000" required id="id_content">{{article.content}}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-row field-writer">
+
+
+                            <div>
+                                <label class="required" for="id_writer">작성자:</label>
+                                <label type="text" name="writer"  maxlength="30" required id="id_writer">{{article.writer}}</label>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row field-write_date">
+
+
+                            <div>
+
+
+                                <label class="required" for="id_write_date_0">작성일자:</label>
+
+                                <p class="datetime">
+                                    <label type="text" name="write_date_0"  maxlength="10" required id="id_write_date_0">{{article.write_date|date:'Y-m-d H:i'}}</label>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row field-click_num">
+
+                            <div>
+                                <label class="required" for="id_click_num">조회수:</label>
+                                <label type="number" name="click_num"  required id="id_click_num">{{article.click_num}}</label>
+                            </div>
+                        </div>
+                        <div class="form-row field-like_num">
+
+
+                            <div>
+
+
+                                <label class="required" for="id_like_num">좋아요:</label>
+                                <label type="number" name="like_num"  required id="id_like_num">{{article.like_num}}</label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row field-unlike_num">
+
+                            <div>
+                                <label class="required" for="id_unlike_num">싫어요:</label>
+                                <label type="number" name="unlike_num"  required id="id_unlike_num">{{article.unlike_num}}</label>
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <div class="submit-row">
+
+                        <input type="button" value="Unlike" class="default" name="_unlike" onclick="location.href='{% url 'board:unlike' article_id=article.id%}'">
+                        <input type="button" value="Like" class="default" name="_like" onclick="location.href='{% url 'board:like' article_id=article.id %}'">
+                        <input type="button" value="List" class="default" name="_list" onclick="location.href='{% url 'board:list' %}'">
+                        {% if user.username == article.writer %}
+                        <p class="deletelink-box"><a href="{% url 'board:delete' article.id%}" class="deletelink">Delete</a></p>
+                        <p class="deletelink-box"><a href="{% url 'board:edit' article.id%}" class="deletelink">Edit</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>

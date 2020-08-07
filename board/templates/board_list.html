@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+    <title>Select article to change | Django site admin</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css">
+
+
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+
+
+    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+    <script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+    <script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+
+
+    <meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" app-board model-article change-list"
+      data-admin-utc-offset="32400">
+
+<!-- Container -->
+<div id="container">
+
+
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+
+            <h1 id="site-name"><a href="/board/">게시판</a></h1>
+
+        </div>
+
+
+        <div id="user-tools">
+
+            Welcome,
+            <strong>{{user.username}}</strong>.
+
+            <!--            <a href="/">View site</a> /-->
+            <!--            <a href="/admin/password_change/">Change password</a> /-->
+
+            <a href="{% url 'board:logOut' %}">Log out</a>
+
+        </div>
+
+
+
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrumbs">
+        <a href="{% url 'board:list' %}">Home</a>
+        &rsaquo; Articles
+    </div>
+
+
+    <!-- Content -->
+    <div id="content" class="flex">
+
+        <h1>글 목록 리스트</h1>
+
+        <div id="content-main">
+
+            <ul class="object-tools">
+
+
+                <li>
+
+                    <a href="{% url 'board:write' %}" class="addlink">
+                        글쓰기
+                    </a>
+                </li>
+
+
+
+
+            </ul>
+
+
+            <div class="module" id="changelist">
+
+
+
+
+
+                <form id="changelist-form" method="post" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="HWy41Tizt6OKP1g1mo5gDVXMSkAaeKkER7aUFqSVnhXAFI6kLM07SJH7I9vxW443">
+
+
+
+                    <div class="results">
+                        <table id="result_list">
+                            <thead>
+                            <tr>
+
+                                <th scope="col"  class="action-checkbox-column">
+
+                                    <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
+                                    <div class="clear"></div>
+                                </th>
+<!--                                <th scope="col"  class="column-__str__">-->
+                                <th>글번호</th>
+                                <th>글제목</th>
+                                <th>작성자</th>
+                                <th>작성일자</th>
+                                <th>조회수</th>
+<!--                                    <div class="text"><span>Article</span></div>-->
+<!--                                    <div class="clear"></div>-->
+                                </th>
+                            </tr>
+                            </thead>
+                            {% for article in article_list %}
+                            <tbody>
+
+
+                            <tr class="row1">
+                                <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td>
+<!--                                <th class="field-__str__"><a href="/admin/board/article/1/change/">test</a></th></tr>-->
+
+                            <td>{{article.id}}</td>
+                            <td><a href="{% url 'board:detail' article.id %}">{{article.title}}</a></td>
+                            <td>{{article.writer}}</td>
+                            <td>{{article.write_date|date:'Y-m-d H:i'}}</td>
+                            <td>{{article.click_num}}</td>
+
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+
+
+
+
+
+<!--                    <p class="paginator">-->
+
+<!--                        1 article-->
+
+
+<!--                    </p>-->
+
+                </form>
+            </div>
+        </div>
+
+
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>
+
