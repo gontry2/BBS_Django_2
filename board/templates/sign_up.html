@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="/static/admin/css/login.css">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
-
     <meta name="robots" content="NONE,NOARCHIVE">
 </head>
 
@@ -24,7 +23,7 @@
     <div id="header">
         <div id="branding">
 
-            <h1 id="site-name"><a href="/board/list">BBS(Bulletin Board System) 회원 가입</a></h1>
+            <h1 id="site-name"><a href="{% url 'board:signUp' %}">BBS(Bulletin Board System) 회원 가입</a></h1>
 
         </div>
 
@@ -37,7 +36,7 @@
 
 
         <div id="content-main">
-            {% if message %} <span><strong>{{error_message}}</strong></span> {% endif %}
+            {% if message %} <span><strong>{{message}}</strong></span> {% endif %}
 
             <form action="{% url 'board:signUp' %}" method="post" id="login-form">
                 {% csrf_token %}
@@ -53,7 +52,7 @@
                 </div>
                 <div class="form-row">
 
-                    <label class="required" for="id_password">Verify Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
+                    <label class="required" for="id_password">Verify Password:</label> <br><input style="width: 100%" type="password" name="verify_password" autocomplete="current-password" required id="id_verify_password">
                     <input type="hidden" name="next" value="/admin/">
                 </div>
 

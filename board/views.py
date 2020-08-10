@@ -21,16 +21,6 @@ def list(request):
     context = {'article_list': board_list}
     return render(request, 'board_list.html', context)
 
-# # 게시판 상세내용 보기, 조회수 증가
-# def detail(request, article_id):
-#     article = get_object_or_404(Article, pk=article_id)
-#     article_form = ArticleForm(instance=article)
-#    # print(article_form)
-#     article_form.fields['title'].required = False
-#     article_form.fields['title'].disabled = True
-#     # article_form.fields['content'].widget.attr['readonly'] = True
-#     return render(request, 'board_edit.html', {'article_form': article_form, 'article': article})
-
 # 게시판 상세내용 보기, 조회수 증가
 def detail(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
@@ -106,7 +96,7 @@ def login(request):
             return render(request, 'login.html', message)
         else:
             if password != request.POST["password"]:
-                message = {'message': '비밀번호가 틀렸습니다."'}
+                message = {'message': '비밀번호가 틀렸습니다.'}
                 return render(request, 'login.html', message)
             else:
                 save_session(request, request.POST["username"], request.POST["password"])
@@ -123,6 +113,15 @@ def logOut(request):
 # signUp
 def signUp(request):
     if request.method == "POST":
+        password = request.POST["password"]
+        verify_password = request.POST["verify_password"]
+        print(password)
+        print(verify_password)
+        if ( password != verify_password ):
+            url = 'sign_up.html'
+            message = {'message': '비밀번호를 확인해주세요.'}
+            return render(request, url, message)
+
         try:
             user = User.objects.get(username=request.POST["username"])
         except (KeyError, User.DoesNotExist):

@@ -92,3 +92,5 @@ $(".comment").delegate(".deleteComment", "click", function(){
 //    $("#comment_"+pk).append(blockContent)
 //
 //  })
+
+
